@@ -1,0 +1,4 @@
+- Sure, how about making the share link screen the test task? (Assume user is registered - registration process not in scope)
+- Generate a personal invitation link, api call to a link shorterner and then track who this new visitor was invited by
+- Make the two screens in the mockup using React/ redux
+- Bonus tasks (not required Cover critical business logic with unit or functional testing)
