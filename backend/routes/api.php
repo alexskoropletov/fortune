@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/users', 'ApiController@users')->middleware('cors');
+Route::get('/short', 'ApiController@short')->middleware('cors');
+Route::get('/original', 'ApiController@original')->middleware('cors');

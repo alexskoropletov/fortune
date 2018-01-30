@@ -2,3 +2,15 @@
 - Generate a personal invitation link, api call to a link shorterner and then track who this new visitor was invited by
 - Make the two screens in the mockup using React/ redux
 - Bonus tasks (not required Cover critical business logic with unit or functional testing)
+
+
+TODO:
+[ ] Interface
+    [ ] URL shortener
+    [ ] Short URL decoder
+[x] Seed for users
+[ ] User - short URL relation table
+[ ] Api controller
+	[ ] API route to get list of users
+	[ ] API route to get a short url
+	[ ] API route to get user by short url
