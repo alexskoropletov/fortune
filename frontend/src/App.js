@@ -5,6 +5,7 @@ import './Shortener'
 import './Detector'
 import Shortener from "./Shortener";
 import Detector from "./Detector";
+import config from './config';
 
 class App extends Component {
   render() {
@@ -16,10 +17,10 @@ class App extends Component {
           </header>
           <div className="row">
             <div className="col-md-6 col-sm-6">
-              <Shortener/>
+              <Shortener apiUrl={config.API_URL}/>
             </div>
             <div className="col-md-6 col-sm-6">
-              <Detector/>
+              <Detector apiUrl={config.API_URL}/>
             </div>
           </div>
         </div>

@@ -5,12 +5,12 @@
 
 
 TODO:
-[ ] Interface
-    [ ] URL shortener
-    [ ] Short URL decoder
+[x] Interface
+    [x] URL shortener
+    [x] Short URL decoder
 [x] Seed for users
-[ ] User - short URL relation table
-[ ] Api controller
-	[ ] API route to get list of users
-	[ ] API route to get a short url
-	[ ] API route to get user by short url
+[x] User - short URL relation table
+[x] Api controller
+	[x] API route to get list of users
+	[x] API route to get a short url
+	[x] API route to get user by short url
