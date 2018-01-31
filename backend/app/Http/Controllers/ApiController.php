@@ -40,8 +40,9 @@ class ApiController extends Controller
             'result' => 'error',
         ];
         if ($request->query('original_url') && $user = User::find($request->query('user_id'))) {
+            $original_url = $this->getOriginalUrl($request->query('original_url'), $user->id);
             // checking if the user has already shortened this url
-            $exists = ShortUrls::where('original_url', $request->query('original_url'))
+            $exists = ShortUrls::where('original_url', $original_url)
                 ->where('user_id', $user->id)
                 ->first()
             ;
@@ -56,7 +57,7 @@ class ApiController extends Controller
                     $client->addScope("https://www.googleapis.com/auth/urlshortener");
                     $service = new \Google_Service_Urlshortener($client);
                     $url = new \Google_Service_Urlshortener_Url();
-                    $url->longUrl = $request->query('original_url');
+                    $url->longUrl = $original_url;
                     $short = $service->url->insert($url);
                 } catch (\Exception $e) {
                     $result['message'] = $e->getMessage();
@@ -65,7 +66,7 @@ class ApiController extends Controller
                     $shortUrl = new ShortUrls();
                     $shortUrl->user_id = $user->id;
                     $shortUrl->short_url = $short->id;
-                    $shortUrl->original_url = $request->query('original_url');
+                    $shortUrl->original_url = $original_url;
                     $shortUrl->save();
                     $result['result'] = 'OK';
                     $result['message'] = $short->id;
@@ -91,5 +92,15 @@ class ApiController extends Controller
             $result['user_id'] = $shortUrl->user->id;
         }
         return response()->json($result);
+    }
+
+    /**
+     * Method that adds User Personal Key to URL to make google generate unique short link for every user
+     * @param $url
+     * @param $user_id
+     * @return string
+     */
+    private function getOriginalUrl($url, $user_id) {
+        return $url . (strstr($url, '?') === false ? '?' : '&') . 'upk=' . sha1($user_id);
     }
 }
